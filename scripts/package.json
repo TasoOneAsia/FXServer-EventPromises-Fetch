@@ -3,6 +3,7 @@
   "description": "Proof of concept to show how to use fetch to return server side data",
   "version": "1.0.0",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch"

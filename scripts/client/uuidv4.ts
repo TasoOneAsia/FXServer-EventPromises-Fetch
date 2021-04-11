@@ -1,5 +1,7 @@
 // This is used as the UUID node package has problems with the v8 client runtime
-// Credits to d0p3t
+// and I really don't want to install yet another useless dep.
+
+// Full Credits to d0p3t, you can find the source at the link below
 // https://github.com/d0p3t/fivem-js/blob/master/src/utils/UUIDV4.ts
 export const uuidv4 = (): string => {
   let uuid = '';
