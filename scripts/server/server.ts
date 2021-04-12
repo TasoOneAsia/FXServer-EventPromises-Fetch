@@ -1,4 +1,5 @@
-import { onNetPromise } from './onNetPromise';
+import { onNetPromise } from "./onNetPromise";
+import { mockDataList } from "./mockData";
 
 // Interface for our random data
 interface RandomDataDTO {
@@ -8,54 +9,60 @@ interface RandomDataDTO {
 }
 
 interface TypeReturnData {
-  wowNiceField: boolean,
-  onionCropYield: string,
-  isAngularJs: boolean
+  wowNiceField: boolean;
+  onionCropYield: string;
+  isAngularJs: boolean;
 }
 
-onNetPromise<TypeReturnData>('myNetPromise', (source: number, arg1: string, arg2: RandomDataDTO) => {
-  console.log('Coming from source ${source}');
-  console.log('Arg1:', arg1)
-  console.log('Arg2:', arg2)
+onNetPromise<TypeReturnData>(
+  "myNetPromise",
+  (source: number, arg1: string, arg2: RandomDataDTO) => {
+    console.log("Coming from source ${source}");
+    console.log("Arg1:", arg1);
+    console.log("Arg2:", arg2);
 
-  // Do something and calculate return data
+    // Do something and calculate return data
 
-  // ...hugeBrainCalc()
+    // ...hugeBrainCalc()
 
-  // Data we want to send back to the client we must return in the callback
-  const returnData = {
-    wowNiceField: true,
-    onionCropYield: '100%',
-    isAngularJs: true
+    // Data we want to send back to the client we must return in the callback
+    const returnData = {
+      wowNiceField: true,
+      onionCropYield: "100%",
+      isAngularJs: true,
+    };
+
+    return returnData;
   }
+);
 
-  return returnData
-});
+onNetPromise<TypeReturnData>(
+  "netPromiseError",
+  (source: number, arg1: string, arg2: RandomDataDTO) => {
+    console.log("Coming from source ${source}");
+    console.log("Arg1:", arg1);
+    console.log("Arg2:", arg2);
 
+    // Do something and calculate return data
+    // But what if we encounter an error here and want to exit and respond?
+    // For this case we want to return an array with index 0 being the error message
+    // and index 1 being any other data we wish to return
 
-onNetPromise<TypeReturnData>('netPromiseError', (source: number, arg1: string, arg2: RandomDataDTO) => {
-  console.log('Coming from source ${source}');
-  console.log('Arg1:', arg1)
-  console.log('Arg2:', arg2)
+    // ...hugeBrainCalc()
 
-  // Do something and calculate return data
-  // But what if we encounter an error here and want to exit and respond?
-  // For this case we want to return an array with index 0 being the error message
-  // and index 1 being any other data we wish to return
+    // Data we want to send back to the client we must return in the callback
+    const returnData = {
+      wowNiceField: true,
+      onionCropYield: "100%",
+      isAngularJs: true,
+    };
 
-  return ['Uh oh we screwed up']
-
-
-  return ['Uh oh we really screwed up', 'My additional data']
-  // ...hugeBrainCalc()
-
-  // Data we want to send back to the client we must return in the callback
-  const returnData = {
-    wowNiceField: true,
-    onionCropYield: '100%',
-    isAngularJs: true
+    return returnData;
   }
+);
 
-  return returnData
+onNetPromise("getServerData", () => {
+  console.log("Server received getServerData request");
+
+  return mockDataList;
 });
-
