@@ -13,5 +13,6 @@ client_script 'dist/client/*.js'
 ui_page 'dist/nui/index.html'
 
 files {
+  'dist/nui/index.html',
   'dist/nui/static/**/*'
 }
