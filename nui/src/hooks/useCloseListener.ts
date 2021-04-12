@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useVisible } from "../providers/VisibleProvider";
+import fetchNui from "../utils/fetchNui";
 
 export const useCloseListener = () => {
   const { visible, setVisible } = useVisible();
@@ -9,6 +10,7 @@ export const useCloseListener = () => {
       if (!visible) return;
       if (key === "Escape") {
         setVisible(false);
+        fetchNui("closeUI");
       }
     };
 
