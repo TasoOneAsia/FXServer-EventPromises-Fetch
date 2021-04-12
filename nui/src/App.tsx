@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
 import { DataListComp } from "./components/DataListComp";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider, Fade } from "@material-ui/core";
 import InjectDebugData from "./utils/InjectDebugData";
 import { SnackbarProvider } from "./providers/SnackbarProvider";
-import { VisibleProvider } from "./providers/VisibleProvider";
+import { useVisible } from "./providers/VisibleProvider";
+import { useCloseListener } from "./hooks/useCloseListener";
 
 const darkTheme = createMuiTheme({
   typography: {
@@ -51,14 +52,17 @@ InjectDebugData([
 ]);
 
 function App() {
+  useCloseListener();
+  const { visible } = useVisible();
+
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
-        <VisibleProvider>
-          <SnackbarProvider>
+        <SnackbarProvider>
+          <Fade in={visible} mountOnEnter unmountOnExit>
             <DataListComp />
-          </SnackbarProvider>
-        </VisibleProvider>
+          </Fade>
+        </SnackbarProvider>
       </div>
     </ThemeProvider>
   );

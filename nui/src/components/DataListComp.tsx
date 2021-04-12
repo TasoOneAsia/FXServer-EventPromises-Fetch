@@ -18,7 +18,6 @@ import { makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { useVisible } from "../providers/VisibleProvider";
 import { MockDataItem } from "../types";
-import { useCloseListener } from "../hooks/useCloseListener";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -116,7 +115,6 @@ const InfoCard: React.FC<InfoCardProps> = ({
 };
 
 export const DataListComp: React.FC = () => {
-  useCloseListener();
   const [data, setData] = useState<MockDataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { visible } = useVisible();
