@@ -125,7 +125,7 @@ export const DataListComp: React.FC = () => {
     if (!data.length) {
       fetchNui<MockListItem[]>("getData").then((value) => {
         setData(value || []);
-        setLoading(value ? false : true);
+        setLoading(!value);
       });
     }
     // Only fetch on mount of the component

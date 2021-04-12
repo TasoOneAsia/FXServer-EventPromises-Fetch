@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
@@ -30,6 +30,7 @@ export const SnackbarProvider: React.FC = ({ children }) => {
 
   const handleClose = () => {
     setIsOpen(false);
+    setAlert({ level: "info", message: "" });
   };
 
   return (
