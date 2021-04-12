@@ -1,4 +1,4 @@
-import { MockListItem } from "../recoil/MockDataList/mockDataList.type";
+import { MockDataItem } from "../types";
 import { mockDataList } from "./mockData";
 
 function mockPromise<T>(data: T): Promise<T> {
@@ -21,7 +21,7 @@ export default async function fetchNui<T = any>(
   let endpoint;
   if (process.env.NODE_ENV === "development") {
     // @ts-ignore
-    return mockPromise<MockListItem>(mockDataList);
+    return mockPromise<MockDataItem>(mockDataList);
   }
 
   const options = {

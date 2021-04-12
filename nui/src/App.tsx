@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
 import { DataListComp } from "./components/DataListComp";
-import { useMainService } from "./hooks/useMainService";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import InjectDebugData from "./utils/InjectDebugData";
 import { SnackbarProvider } from "./providers/SnackbarProvider";
+import { VisibleProvider } from "./providers/VisibleProvider";
 
 const darkTheme = createMuiTheme({
   typography: {
@@ -51,14 +51,14 @@ InjectDebugData([
 ]);
 
 function App() {
-  useMainService();
-
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
-        <SnackbarProvider>
-          <DataListComp />
-        </SnackbarProvider>
+        <VisibleProvider>
+          <SnackbarProvider>
+            <DataListComp />
+          </SnackbarProvider>
+        </VisibleProvider>
       </div>
     </ThemeProvider>
   );

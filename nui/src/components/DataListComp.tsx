@@ -16,8 +16,9 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { useVisible } from "../recoil/hooks/useVisible";
-import { MockListItem } from "../recoil/MockDataList/mockDataList.type";
+import { useVisible } from "../providers/VisibleProvider";
+import { MockDataItem } from "../types";
+import { useCloseListener } from "../hooks/useCloseListener";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -115,15 +116,16 @@ const InfoCard: React.FC<InfoCardProps> = ({
 };
 
 export const DataListComp: React.FC = () => {
-  const [data, setData] = useState<MockListItem[]>([]);
+  useCloseListener();
+  const [data, setData] = useState<MockDataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const visible = useVisible();
+  const { visible } = useVisible();
 
   const classes = useStyles();
 
   useEffect(() => {
     if (!data.length) {
-      fetchNui<MockListItem[]>("getData").then((value) => {
+      fetchNui<MockDataItem[]>("getData").then((value) => {
         setData(value || []);
         setLoading(!value);
       });

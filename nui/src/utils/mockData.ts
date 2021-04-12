@@ -1,6 +1,6 @@
-import { MockListItem } from "../recoil/MockDataList/mockDataList.type";
+import { MockDataItem } from "../types";
 
-export const mockDataList: MockListItem[] = [
+export const mockDataList: MockDataItem[] = [
   {
     job: "Angular Dev",
     description: "Angular.js developer, who loves two-way data binding",
