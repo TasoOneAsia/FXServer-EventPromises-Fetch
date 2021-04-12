@@ -18,7 +18,6 @@ export default async function fetchNui<T = any>(
   eventName: string,
   data?: any
 ): Promise<T> {
-  let endpoint;
   if (process.env.NODE_ENV === "development") {
     // @ts-ignore
     return mockPromise<MockDataItem>(mockDataList);
@@ -33,7 +32,10 @@ export default async function fetchNui<T = any>(
   };
 
   try {
-    const resp = await fetch(endpoint, options);
+    const resp = await fetch(
+      `https://${(window as any).GetParentResourceName()}/${eventName}`,
+      options
+    );
 
     return await resp.json();
   } catch (e) {
